@@ -1,10 +1,15 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O3 -Wall -Wextra -pedantic
 TARGET = cbctt_solver
-SRCS = main.cpp Instance.cpp Evaluator.cpp GreedyInitializer.cpp
+SRCS = main.cpp Instance.cpp Evaluator.cpp GreedyInitializer.cpp Neighborhood.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-all: $(TARGET)
+TS_OBJS = ts_main.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o DeltaEvaluator.o TabuSearch.o AdaptiveControl.o
+
+all: $(TARGET) cbctt_ts
+
+cbctt_ts: $(TS_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(TS_OBJS)
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
@@ -53,7 +58,89 @@ test-all: $(TARGET)
 	echo "=========================================================================================="; \
 	echo "Resumen: $$feas de $$total instancias fueron 100% FACTIBLES con la heuristica voraz."
 
-clean:
-	rm -f $(OBJS) $(TARGET)
+tests/test_neighborhood: tests/test_neighborhood.cpp Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o Neighborhood.hpp Instance.hpp Evaluator.hpp GreedyInitializer.hpp
+	$(CXX) $(CXXFLAGS) -I. -o $@ tests/test_neighborhood.cpp Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o
 
-.PHONY: all test test-all clean
+Neighborhood.o: Neighborhood.hpp Instance.hpp
+
+test-neighborhood: tests/test_neighborhood
+	./tests/test_neighborhood
+
+DeltaEvaluator.o: DeltaEvaluator.hpp Neighborhood.hpp Evaluator.hpp
+TabuSearch.o ts_main.o: TabuSearch.hpp DeltaEvaluator.hpp AdaptiveControl.hpp
+AdaptiveControl.o: AdaptiveControl.hpp Neighborhood.hpp
+
+tests/test_delta_evaluator: tests/test_delta_evaluator.cpp DeltaEvaluator.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o DeltaEvaluator.hpp
+	$(CXX) $(CXXFLAGS) -I. -o $@ tests/test_delta_evaluator.cpp DeltaEvaluator.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o
+
+tests/test_tabu_search: tests/test_tabu_search.cpp TabuSearch.o DeltaEvaluator.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o AdaptiveControl.o TabuSearch.hpp DeltaEvaluator.hpp
+	$(CXX) $(CXXFLAGS) -I. -o $@ tests/test_tabu_search.cpp TabuSearch.o DeltaEvaluator.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o AdaptiveControl.o
+
+tests/test_adaptive: tests/test_adaptive.cpp TabuSearch.o DeltaEvaluator.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o AdaptiveControl.o TabuSearch.hpp AdaptiveControl.hpp
+	$(CXX) $(CXXFLAGS) -I. -o $@ tests/test_adaptive.cpp TabuSearch.o DeltaEvaluator.o Instance.o Evaluator.o GreedyInitializer.o Neighborhood.o AdaptiveControl.o
+
+test-adaptive: tests/test_adaptive
+	./tests/test_adaptive
+
+test-delta: tests/test_delta_evaluator
+	./tests/test_delta_evaluator
+
+test-ts: tests/test_tabu_search
+	./tests/test_tabu_search
+
+# Parámetros configurables
+SEED ?= 42
+ITERATIONS ?= 100000
+TENURE ?= 7
+CANDIDATES ?= 100
+
+# Ejecutar las cuatro variantes sobre todas las instancias
+test-all-ts: cbctt_ts
+	@set -eu; \
+	tmpdir=$$(mktemp -d); \
+	trap 'rm -rf "$$tmpdir"' EXIT HUP INT TERM; \
+	printf "%-13s %-8s %-10s %-10s %-10s\n" \
+		"Instancia" "Variante" "Factible" "Greedy" "Mejor TS"; \
+	echo "------------------------------------------------------------"; \
+	total=0; \
+	for file in Instances/*.ctt; do \
+		[ -f "$$file" ] || continue; \
+		for spec in "A fixed uniform" "B dynamic uniform" \
+		            "C fixed adaptive" "D dynamic adaptive"; do \
+			set -- $$spec; \
+			variant=$$1; \
+			tenure=$$2; \
+			operator=$$3; \
+			if ! out=$$(./cbctt_ts "$$file" \
+				--seed $(SEED) \
+				--iterations $(ITERATIONS) \
+				--tenure $(TENURE) \
+				--candidates $(CANDIDATES) \
+				--tenure-mode "$$tenure" \
+				--operator-mode "$$operator" \
+				--output-dir "$$tmpdir" 2>&1); then \
+				printf "ERROR: %s TS-%s\n%s\n" "$$file" "$$variant" "$$out"; \
+				exit 1; \
+			fi; \
+			feasible=$$(printf '%s\n' "$$out" | awk -F': ' '/^Final feasible: /{print $$2; exit}'); \
+			greedy=$$(printf '%s\n' "$$out" | awk -F': ' '/^Greedy: /{print $$2; exit}'); \
+			best=$$(printf '%s\n' "$$out" | awk -F': ' '/^Best TS: /{print $$2; exit}'); \
+			if [ "$$feasible" != "YES" ] || \
+			   [ -z "$$greedy" ] || [ -z "$$best" ] || \
+			   [ "$$best" -gt "$$greedy" ]; then \
+				printf "VALIDACION FALLIDA: %s TS-%s\n" "$$file" "$$variant"; \
+				exit 1; \
+			fi; \
+			printf "%-13s %-8s %-10s %-10s %-10s\n" \
+				"$$(basename "$$file" .ctt)" "TS-$$variant" \
+				"$$feasible" "$$greedy" "$$best"; \
+			total=$$((total + 1)); \
+		done; \
+	done; \
+	echo "------------------------------------------------------------"; \
+	echo "Ejecuciones validadas: $$total"
+
+clean:
+	rm -f $(OBJS) $(TS_OBJS) $(TARGET) cbctt_ts tests/test_neighborhood tests/test_delta_evaluator tests/test_tabu_search tests/test_adaptive
+
+.PHONY: all test test-all test-neighborhood test-delta test-ts test-adaptive test-all-ts clean
