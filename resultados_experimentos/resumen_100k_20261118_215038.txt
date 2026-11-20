@@ -1,0 +1,104 @@
+
+============================================================
+RESULTADOS ESTADÍSTICOS - 100.000 ITERACIONES
+============================================================
+
+=== PROMEDIOS POR INSTANCIA Y VARIANTE ===
+Instancia  Var.         Media   Desv.Std     Mejor   Tiempo(s)     N
+comp01     TS-A          9.20       0.45         9       8.092     5
+comp01     TS-B         10.20       1.30         9       7.945     5
+comp01     TS-C          9.00       0.71         8       7.219     5
+comp01     TS-D         12.20       1.10        11       7.241     5
+comp02     TS-A        177.80       8.70       163      10.480     5
+comp02     TS-B        173.80      11.78       161      10.521     5
+comp02     TS-C        171.60       9.21       161       8.538     5
+comp02     TS-D        165.00      10.00       155       8.127     5
+comp03     TS-A        165.00       6.75       154       9.270     5
+comp03     TS-B        174.40      14.08       155       9.174     5
+comp03     TS-C        166.00       8.69       153       7.934     5
+comp03     TS-D        167.40       2.88       163       7.779     5
+comp04     TS-A        118.60       3.58       114       9.617     5
+comp04     TS-B        118.60       5.18       114       9.593     5
+comp04     TS-C        118.20       6.22       111       8.813     5
+comp04     TS-D        120.20       3.19       116       9.008     5
+comp05     TS-A        523.80      40.68       470      16.277     5
+comp05     TS-B        542.40      21.73       522      16.269     5
+comp05     TS-C        531.60      23.16       505      13.341     5
+comp05     TS-D        539.20      26.99       511      12.850     5
+comp06     TS-A        160.60       6.88       151       8.246     5
+comp06     TS-B        168.80      10.43       157       8.232     5
+comp06     TS-C        179.60       6.54       169       7.537     5
+comp06     TS-D        167.60      11.80       148       7.484     5
+comp07     TS-A        133.40       6.80       125       9.671     5
+comp07     TS-B        141.60       8.08       132       9.186     5
+comp07     TS-C        133.60      11.78       121       8.333     5
+comp07     TS-D        136.60       5.55       129       8.940     5
+comp08     TS-A        132.60       4.16       126       7.944     5
+comp08     TS-B        131.20       2.59       128       7.694     5
+comp08     TS-C        129.60       6.35       124       7.025     5
+comp08     TS-D        132.40       6.23       125       7.004     5
+comp09     TS-A        198.20       6.83       190       9.470     5
+comp09     TS-B        198.80       5.50       193       9.389     5
+comp09     TS-C        196.00       3.39       193       8.456     5
+comp09     TS-D        199.80       5.40       194       8.267     5
+comp10     TS-A        122.00       3.61       118       8.848     5
+comp10     TS-B        118.00      11.34       108       9.077     5
+comp10     TS-C        117.40      13.09       103       7.738     5
+comp10     TS-D        122.40      13.48       111       7.707     5
+comp11     TS-A          3.60       0.55         3       5.592     5
+comp11     TS-B          4.20       0.84         3       5.645     5
+comp11     TS-C          4.40       0.89         3       5.437     5
+comp11     TS-D          4.40       0.89         3       5.397     5
+comp12     TS-A        471.40      12.92       457      13.818     5
+comp12     TS-B        454.80      23.94       433      13.736     5
+comp12     TS-C        468.00      26.67       445      12.142     5
+comp12     TS-D        468.20      19.27       442      12.053     5
+comp13     TS-A        156.60       4.04       153       8.372     5
+comp13     TS-B        160.80       3.70       156       8.510     5
+comp13     TS-C        156.20       3.19       154       7.322     5
+comp13     TS-D        150.60       6.43       145       7.367     5
+comp14     TS-A        131.00       7.65       119       9.067     5
+comp14     TS-B        129.00       3.46       123       8.962     5
+comp14     TS-C        130.40       8.08       122       7.733     5
+comp14     TS-D        131.60       6.50       122       7.823     5
+comp15     TS-A        165.00       6.75       154      10.122     5
+comp15     TS-B        174.40      14.08       155       9.739     5
+comp15     TS-C        166.00       8.69       153       8.055     5
+comp15     TS-D        167.40       2.88       163       8.221     5
+comp16     TS-A        148.40       3.44       143       8.521     5
+comp16     TS-B        149.60       6.50       140       8.406     5
+comp16     TS-C        147.20       5.97       140       7.241     5
+comp16     TS-D        147.60       5.03       140       7.560     5
+comp17     TS-A        181.40       5.68       173       8.062     5
+comp17     TS-B        183.80       7.22       174       8.058     5
+comp17     TS-C        179.20       4.44       172       7.158     5
+comp17     TS-D        180.20       6.98       171       7.207     5
+comp18     TS-A        133.60       4.93       126      10.114     5
+comp18     TS-B        132.20       5.54       127      10.691     5
+comp18     TS-C        132.80       0.84       132       9.684     5
+comp18     TS-D        137.00       6.00       128       9.385     5
+comp19     TS-A        149.80      10.33       134       9.147     5
+comp19     TS-B        159.20       5.40       151       8.946     5
+comp19     TS-C        153.20       9.15       142       7.897     5
+comp19     TS-D        159.00      10.07       150       8.005     5
+comp20     TS-A        149.40      17.44       132       8.798     5
+comp20     TS-B        150.80      13.72       137       8.925     5
+comp20     TS-C        156.40       8.79       149       7.785     5
+comp20     TS-D        150.00      20.70       130       8.226     5
+comp21     TS-A        207.80       3.77       204       9.902     5
+comp21     TS-B        210.80       7.66       205       9.384     5
+comp21     TS-C        209.40       6.50       199       8.476     5
+comp21     TS-D        209.40       2.88       206       8.783     5
+
+=== RESUMEN GLOBAL POR VARIANTE ===
+TS-A: costo medio 173.30 | mejora media 51.36% | tiempo medio 9.497 s | ejecuciones 105
+TS-B: costo medio 175.59 | mejora media 50.57% | tiempo medio 9.433 s | ejecuciones 105
+TS-C: costo medio 174.09 | mejora media 51.15% | tiempo medio 8.279 s | ejecuciones 105
+TS-D: costo medio 174.68 | mejora media 50.93% | tiempo medio 8.306 s | ejecuciones 105
+
+=== VERIFICACIÓN FINAL ===
+Ejecuciones completadas: 420 / 420
+ESTADO: EXPERIMENTO COMPLETADO CORRECTAMENTE
+
+CSV: resultados_experimentos/experimento_100k_20261118_215038.csv
+Resumen: resultados_experimentos/resumen_100k_20261118_215038.txt

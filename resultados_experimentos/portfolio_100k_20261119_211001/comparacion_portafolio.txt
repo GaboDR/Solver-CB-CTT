@@ -1,0 +1,47 @@
+
+==========================================================
+ COMPARACIÓN ESTADÍSTICA DEL PORTAFOLIO
+==========================================================
+Ejecuciones: 105 / 105
+Costo medio TS-A: 173.30
+Costo medio portafolio: 165.63
+Reducción del costo medio vs TS-A: 4.42%
+Mejora media frente a Greedy: 53.49%
+Portafolio mejor que TS-A: 71 de 105
+Portafolio igual a TS-A: 34 de 105
+Ganadores: TS-A=34 TS-B=25 TS-C=25 TS-D=21
+Tiempo agregado anterior: 62.15 min
+Tiempo medio por portafolio: 26.282 s
+Verificación cruzada: CORRECTA
+
+=== COSTO MEDIO POR INSTANCIA ===
+Instancia        TS-A   Portafolio  Reducción
+comp01           9.20         8.80       4.35%
+comp02         177.80       162.80       8.44%
+comp03         165.00       157.40       4.61%
+comp04         118.60       115.00       3.04%
+comp05         523.80       507.20       3.17%
+comp06         160.60       157.00       2.24%
+comp07         133.40       127.20       4.65%
+comp08         132.60       127.60       3.77%
+comp09         198.20       193.00       2.62%
+comp10         122.00       111.00       9.02%
+comp11           3.60         3.40       5.56%
+comp12         471.40       443.00       6.02%
+comp13         156.60       149.20       4.73%
+comp14         131.00       123.00       6.11%
+comp15         165.00       157.40       4.61%
+comp16         148.40       142.60       3.91%
+comp17         181.40       173.20       4.52%
+comp18         133.60       129.20       3.29%
+comp19         149.80       145.80       2.67%
+comp20         149.40       139.60       6.56%
+comp21         207.80       204.80       1.44%
+
+=== TIEMPO TOTAL DEL EXPERIMENTO ===
+Tiempo total real: 965.10 segundos
+Tiempo total real: 16.08 minutos
+
+CSV: resultados_experimentos/portfolio_100k_20261119_211001/resultados_portafolio.csv
+Resumen: resultados_experimentos/portfolio_100k_20261119_211001/comparacion_portafolio.txt
+Soluciones: resultados_experimentos/portfolio_100k_20261119_211001/solutions
